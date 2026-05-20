@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="description" content="WeatherGuru — погода сейчас, почасовой и недельный прогноз, избранные города, уведомления и отзывы." />
+    <title>WeatherGuru — погода и прогноз</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="WeatherGuru" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="auth-view" id="authView">
+        <div class="brand-block">
+          <div class="brand-mark">WG</div>
+          <p class="eyebrow">Мобильное приложение</p>
+          <h1>WeatherGuru</h1>
+          <p class="lead">Погода сейчас, прогноз, избранные города, уведомления и отзывы в одном удобном экране.</p>
+        </div>
+
+        <form class="auth-card" id="authForm">
+          <div class="tabs" role="tablist" aria-label="Авторизация">
+            <button class="tab active" type="button" data-mode="login">Вход</button>
+            <button class="tab" type="button" data-mode="register">Регистрация</button>
+          </div>
+
+          <label>
+            Имя пользователя
+            <input id="username" autocomplete="username" required placeholder="Например, student" />
+          </label>
+          <label>
+            Пароль
+            <input id="password" type="password" autocomplete="current-password" required placeholder="Минимум 4 символа" />
+          </label>
+          <button class="primary-btn" type="submit" id="authSubmit">Войти</button>
+          <p class="hint">Для показа преподавателю можно зарегистрировать любого пользователя. Данные хранятся только в браузере.</p>
+        </form>
+      </section>
+
+      <section class="dashboard hidden" id="dashboard">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">WeatherGuru</p>
+            <h2 id="helloTitle">Погода</h2>
+          </div>
+          <button class="icon-btn" id="logoutBtn" title="Выйти" aria-label="Выйти">↗</button>
+        </header>
+
+        <section class="search-panel">
+          <form class="search-row" id="searchForm">
+            <input id="cityInput" placeholder="Введите город: Москва, Париж, Tokyo" />
+            <button class="primary-btn" type="submit">Найти</button>
+          </form>
+          <button class="secondary-btn" id="locationBtn" type="button">Использовать мое местоположение</button>
+        </section>
+
+        <section class="weather-hero" id="currentWeather">
+          <div class="status-line">Загрузка данных...</div>
+        </section>
+
+        <nav class="section-tabs" aria-label="Разделы">
+          <button class="section-tab active" data-section="forecast">Прогноз</button>
+          <button class="section-tab" data-section="favorites">Избранное</button>
+          <button class="section-tab" data-section="alerts">Уведомления</button>
+          <button class="section-tab" data-section="radar">Радар</button>
+          <button class="section-tab" data-section="comments">Отзывы</button>
+        </nav>
+
+        <section class="content-section" id="forecastSection">
+          <div class="section-title">
+            <h3>Почасовой прогноз</h3>
+            <span id="updatedAt">-</span>
+          </div>
+          <div class="hourly-list" id="hourlyList"></div>
+
+          <div class="section-title">
+            <h3>Прогноз на дни</h3>
+          </div>
+          <div class="daily-grid" id="dailyGrid"></div>
+        </section>
+
+        <section class="content-section hidden" id="favoritesSection">
+          <div class="section-title">
+            <h3>Любимые места</h3>
+            <button class="secondary-btn compact" id="addFavoriteBtn">Добавить текущий город</button>
+          </div>
+          <div class="favorites-list" id="favoritesList"></div>
+        </section>
+
+        <section class="content-section hidden" id="alertsSection">
+          <div class="section-title">
+            <h3>Погодные уведомления</h3>
+            <button class="secondary-btn compact" id="notifyBtn">Включить</button>
+          </div>
+          <div class="alert-list" id="alertList"></div>
+        </section>
+
+        <section class="content-section hidden" id="radarSection">
+          <div class="section-title">
+            <h3>Радар погоды</h3>
+            <span>карта осадков и ветра</span>
+          </div>
+          <iframe
+            class="radar-frame"
+            title="Weather radar"
+            src="https://embed.windy.com/embed2.html?lat=55.7558&lon=37.6173&detailLat=55.7558&detailLon=37.6173&width=650&height=450&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=m%2Fs&metricTemp=%C2%B0C&radarRange=-1"
+            loading="lazy"
+          ></iframe>
+        </section>
+
+        <section class="content-section hidden" id="commentsSection">
+          <div class="section-title">
+            <h3>Комментарии о погоде</h3>
+            <span id="commentCity">-</span>
+          </div>
+          <form class="comment-form" id="commentForm">
+            <textarea id="commentInput" rows="3" placeholder="Напишите отзыв: например, сильный ветер, лучше взять зонт"></textarea>
+            <button class="primary-btn" type="submit">Добавить отзыв</button>
+          </form>
+          <div class="comment-list" id="commentList"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

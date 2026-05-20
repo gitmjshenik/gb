@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#0f766e"/>
+  <circle cx="44" cy="42" r="17" fill="#f59e0b"/>
+  <path d="M37 82h54a20 20 0 0 0 0-40 28 28 0 0 0-53-8 24 24 0 0 0-1 48z" fill="#ffffff"/>
+  <text x="64" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#0f766e">WG</text>
+</svg>
